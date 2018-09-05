@@ -1,46 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/label_twivy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:id="@+id/label_twivy"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="80sp"
-        app:layout_constraintVertical_bias="0.28"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28" />
 
     <ProgressBar
-        android:visibility="gone"
-        tools:visibility="visible"
         android:id="@+id/progress_circle"
-        app:layout_constraintTop_toBottomOf="@id/label_twivy"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_twivy"
+        tools:visibility="visible" />
+
     <Button
         android:id="@+id/btn_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/label_twivy"
-        android:layout_marginStart="48dp"
-        app:layout_constraintVertical_bias="0.61"
-        android:layout_marginEnd="48dp"
-        android:text="@string/string_login_label"
-        android:background="@drawable/shape_button_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content" />
-    <com.twitter.sdk.android.core.identity.TwitterLoginButton
-        android:id="@+id/t_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/shape_button_login"
+        android:text="@string/string_login_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_twivy"
+        app:layout_constraintVertical_bias="0.61" />
+
 </android.support.constraint.ConstraintLayout>

@@ -15,7 +15,7 @@ sealed class LoginUiModel() {
 
     class OAuthResult(val url: String) : LoginUiModel()
 
-    class Error(val e: Throwable?) : LoginUiModel()
+    class Error(val e: Throwable? = null) : LoginUiModel()
 
     class Loading(val isLoading: Boolean) : LoginUiModel()
 }

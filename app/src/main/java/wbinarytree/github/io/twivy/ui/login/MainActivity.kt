@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import wbinarytree.github.io.twivy.R
 import wbinarytree.github.io.twivy.ui.base.BaseUiActivity
 import wbinarytree.github.io.twivy.ui.base.getViewModel
+import wbinarytree.github.io.twivy.ui.feed.FeedActivity
 
 class MainActivity : BaseUiActivity<Action, LoginUiModel, LoginTranslator>() {
     override fun render(ui: LoginUiModel) {
@@ -22,7 +23,15 @@ class MainActivity : BaseUiActivity<Action, LoginUiModel, LoginTranslator>() {
                     View.INVISIBLE
                 }
             }
+            is LoginUiModel.LoginResult -> {
+                navigateToFeed()
+            }
         }
+    }
+
+    private fun navigateToFeed() {
+        val intent = Intent(this, FeedActivity::class.java)
+        startActivity(intent)
     }
 
     private fun startOAuth(url: String) {
@@ -48,10 +57,6 @@ class MainActivity : BaseUiActivity<Action, LoginUiModel, LoginTranslator>() {
         super.onNewIntent(intent)
         if (intent != null) {
             Action.OAuthResultAction(intent).send()
-//            TwitterCore.getInstance().sessionManager
-//            val code = intent.data.getQueryParameter("code")
-//            val error: String? = intent.data.getQueryParameter("error")
-//            checkCallback(intent)
         }
     }
 }

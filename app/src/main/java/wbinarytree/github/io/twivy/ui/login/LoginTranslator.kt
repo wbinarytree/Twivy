@@ -17,6 +17,7 @@ class LoginTranslator : BaseTranslator<Action, LoginUiModel>() {
             ofType<Action.Login>().login(),
             ofType<Action.OAuthResultAction>().handleOAuth()
         )
+            .onErrorReturn { LoginUiModel.Error(it) }
     }
 
     override fun inject(component: RepositoryComponent) {

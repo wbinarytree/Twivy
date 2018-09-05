@@ -1,9 +1,13 @@
 package wbinarytree.github.io.twivy.ui.login
 
+import android.content.Intent
+
 sealed class Action {
     object Init : Action()
 
     object Login : Action()
+
+    class OAuthResultAction(val result: Intent) : Action()
 }
 
 sealed class LoginUiModel() {

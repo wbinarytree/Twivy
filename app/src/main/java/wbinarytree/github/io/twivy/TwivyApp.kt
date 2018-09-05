@@ -14,7 +14,8 @@ class TwivyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        repoComponent = DaggerRepositoryComponent.builder().repositoryModule(RepositoryModule).build()
+        repoComponent = DaggerRepositoryComponent.builder().repositoryModule(RepositoryModule)
+            .build()
         instance = this
         val config = TwitterConfig.Builder(this)
             .logger(DefaultLogger(Log.DEBUG))

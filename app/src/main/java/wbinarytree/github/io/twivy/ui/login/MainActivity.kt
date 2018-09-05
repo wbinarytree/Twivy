@@ -47,8 +47,10 @@ class MainActivity : BaseUiActivity<Action, LoginUiModel, LoginTranslator>() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         if (intent != null) {
-            val code = intent.data.getQueryParameter("code")
-            val error: String? = intent.data.getQueryParameter("error")
+            Action.OAuthResultAction(intent).send()
+//            TwitterCore.getInstance().sessionManager
+//            val code = intent.data.getQueryParameter("code")
+//            val error: String? = intent.data.getQueryParameter("error")
 //            checkCallback(intent)
         }
     }

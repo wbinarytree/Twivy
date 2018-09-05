@@ -14,7 +14,8 @@ class LoginTranslator : BaseTranslator<Action, LoginUiModel>() {
 
     override fun Observable<Action>.reduce(): Observable<LoginUiModel> {
         return Observable.mergeArray(
-            ofType<Action.Login>().login()
+            ofType<Action.Login>().login(),
+            ofType<Action.OAuthResultAction>().handleOAuth()
         )
     }
 
@@ -29,6 +30,16 @@ class LoginTranslator : BaseTranslator<Action, LoginUiModel>() {
             .map<LoginUiModel> { LoginUiModel.OAuthResult(it) }
             .startWith(LoginUiModel.Loading(true))
             .concatWith(Observable.just(LoginUiModel.Loading(false)))
+    }
+
+    private fun Observable<Action.OAuthResultAction>.handleOAuth(): ObservableSource<LoginUiModel> {
+        return flatMap {
+            authManager.handleOAuthResult(it.result)
+        }
+            .map { LoginUiModel.LoginResult() }
+//            .map<LoginUiModel> { LoginUiModel.OAuthResult(it) }
+//            .startWith(LoginUiModel.Loading(true))
+//            .concatWith(Observable.just(LoginUiModel.Loading(false)))
     }
 }
 

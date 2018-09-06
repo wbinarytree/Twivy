@@ -20,12 +20,16 @@ class MainActivity : BaseUiActivity<Action, LoginUiModel, LoginTranslator>() {
                 progress_circle.visibility = if (ui.isLoading) {
                     View.VISIBLE
                 } else {
-                    View.INVISIBLE
+                    View.GONE
                 }
             }
             is LoginUiModel.LoginResult -> {
                 navigateToFeed()
             }
+            is LoginUiModel.Error       -> {
+                progress_circle.visibility = View.GONE
+            }
+
         }
     }
 

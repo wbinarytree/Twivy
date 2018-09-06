@@ -17,11 +17,14 @@
 
 package wbinarytree.github.io.twivy.model;
 
+import android.arch.persistence.room.Ignore;
+
 import com.google.gson.annotations.SerializedName;
 import com.twitter.sdk.android.core.models.Identifiable;
 import com.twitter.sdk.android.core.models.UserEntities;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -77,6 +80,7 @@ public class User implements Serializable, Identifiable {
      * Read more about User Entities.
      */
     @SerializedName("entities")
+    @Ignore
     public final UserEntities entities;
 
     /**
@@ -272,6 +276,7 @@ public class User implements Serializable, Identifiable {
      * embedded objects stale or inaccurate?.
      */
     @SerializedName("status")
+    @Ignore
     public final Tweet status;
 
     /**
@@ -309,6 +314,7 @@ public class User implements Serializable, Identifiable {
      * withheld from.
      */
     @SerializedName("withheld_in_countries")
+    @Ignore
     public final List<String> withheldInCountries;
 
     /**
@@ -374,6 +380,95 @@ public class User implements Serializable, Identifiable {
         this.withheldInCountries = withheldInCountries;
         this.withheldScope = withheldScope;
     }
+
+    public User(boolean contributorsEnabled, String createdAt, boolean defaultProfile, boolean defaultProfileImage, String description, String email, int favouritesCount, boolean followRequestSent, int followersCount, int friendsCount, boolean geoEnabled, long id, String idStr, boolean isTranslator, String lang, int listedCount, String location, String name, String profileBackgroundColor, String profileBackgroundImageUrl, String profileBackgroundImageUrlHttps, boolean profileBackgroundTile, String profileBannerUrl, String profileImageUrl, String profileImageUrlHttps, String profileLinkColor, String profileSidebarBorderColor, String profileSidebarFillColor, String profileTextColor, boolean profileUseBackgroundImage, boolean protectedUser, String screenName, boolean showAllInlineMedia, int statusesCount, String timeZone, String url, int utcOffset, boolean verified, String withheldScope) {
+        this.contributorsEnabled = contributorsEnabled;
+        this.createdAt = createdAt;
+        this.defaultProfile = defaultProfile;
+        this.defaultProfileImage = defaultProfileImage;
+        this.description = description;
+        this.email = email;
+        this.favouritesCount = favouritesCount;
+        this.followRequestSent = followRequestSent;
+        this.followersCount = followersCount;
+        this.friendsCount = friendsCount;
+        this.geoEnabled = geoEnabled;
+        this.id = id;
+        this.idStr = idStr;
+        this.isTranslator = isTranslator;
+        this.lang = lang;
+        this.listedCount = listedCount;
+        this.location = location;
+        this.name = name;
+        this.profileBackgroundColor = profileBackgroundColor;
+        this.profileBackgroundImageUrl = profileBackgroundImageUrl;
+        this.profileBackgroundImageUrlHttps = profileBackgroundImageUrlHttps;
+        this.profileBackgroundTile = profileBackgroundTile;
+        this.profileBannerUrl = profileBannerUrl;
+        this.profileImageUrl = profileImageUrl;
+        this.profileImageUrlHttps = profileImageUrlHttps;
+        this.profileLinkColor = profileLinkColor;
+        this.profileSidebarBorderColor = profileSidebarBorderColor;
+        this.profileSidebarFillColor = profileSidebarFillColor;
+        this.profileTextColor = profileTextColor;
+        this.profileUseBackgroundImage = profileUseBackgroundImage;
+        this.protectedUser = protectedUser;
+        this.screenName = screenName;
+        this.showAllInlineMedia = showAllInlineMedia;
+        this.statusesCount = statusesCount;
+        this.timeZone = timeZone;
+        this.url = url;
+        this.utcOffset = utcOffset;
+        this.verified = verified;
+        this.withheldScope = withheldScope;
+        this.entities = null;
+        this.status = null;
+        this.withheldInCountries = Collections.emptyList();
+    }
+//    public User(){
+//        this.contributorsEnabled = false;
+//        this.createdAt = "";
+//        this.defaultProfile = false;
+//        this.defaultProfileImage = false;
+//        this.description = "";
+//        this.email = "";
+//        this.favouritesCount = 0;
+//        this.followRequestSent = false;
+//        this.followersCount = 0;
+//        this.friendsCount = 0;
+//        this.geoEnabled = false;
+//        this.id = 0;
+//        this.idStr = "";
+//        this.isTranslator = false;
+//        this.lang = "";
+//        this.listedCount = 0;
+//        this.location = "";
+//        this.name = "";
+//        this.profileBackgroundColor = "";
+//        this.profileBackgroundImageUrl = "";
+//        this.profileBackgroundImageUrlHttps = "";
+//        this.profileBackgroundTile = false;
+//        this.profileBannerUrl = "";
+//        this.profileImageUrl = "";
+//        this.profileImageUrlHttps = "";
+//        this.profileLinkColor = "";
+//        this.profileSidebarBorderColor = "";
+//        this.profileSidebarFillColor = "";
+//        this.profileTextColor = "";
+//        this.profileUseBackgroundImage = false;
+//        this.protectedUser = false;
+//        this.screenName = "";
+//        this.showAllInlineMedia = false;
+//        this.status = null;
+//        this.statusesCount = 0;
+//        this.timeZone = "";
+//        this.url = "";
+//        this.utcOffset = 0;
+//        this.verified = false;
+//        this.withheldScope = "";
+//        this.entities = null;
+//        this.withheldInCountries = Collections.emptyList();
+//    }
 
     @Override
     public long getId() {

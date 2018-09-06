@@ -11,11 +11,13 @@ sealed class Action {
 }
 
 sealed class LoginUiModel() {
-    class LoginResult() : LoginUiModel()
+    object LoginResult : LoginUiModel()
 
     class OAuthResult(val url: String) : LoginUiModel()
 
     class Error(val e: Throwable? = null) : LoginUiModel()
 
     class Loading(val isLoading: Boolean) : LoginUiModel()
+
+    object NeedLogin : LoginUiModel()
 }

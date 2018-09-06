@@ -24,8 +24,8 @@ class FeedTranslator : BaseTranslator<Action, FeedUiModel>() {
 
     private fun Observable<Action.Init>.init(): ObservableSource<FeedUiModel> {
         return flatMap { _ ->
-            tweetRepo.getRecentTimeline()
-                .map<FeedUiModel> { FeedUiModel.TweetResult(it) }
+            tweetRepo.getPagingList()
+                .map<FeedUiModel> { FeedUiModel.TweetPagedResult(it) }
                 .startWith(FeedUiModel.Loading(true))
                 .concatWith(Observable.just(FeedUiModel.Loading(false)))
         }

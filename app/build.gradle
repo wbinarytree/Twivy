@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+androidExtensions {
+    experimental = true
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -64,6 +68,7 @@ dependencies {
     // Paging
     implementation "android.arch.paging:runtime:1.0.1"
     implementation "android.arch.paging:rxjava2:1.0.1"
+    implementation 'com.github.wbinarytree:kotlin-utils-recyclerview:0.2.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

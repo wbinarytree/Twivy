@@ -13,7 +13,23 @@ import wbinarytree.github.io.twivy.repos.AuthManager
 
 object TwitterAuthManager : AuthManager {
 
+    private val service by lazy {
+        OAuth1aService(TwitterCore.getInstance(), TwitterApi())
+    }
+
+    private val sessionManager by lazy { TwitterCore.getInstance().sessionManager }
+
     private var cachedRequestToken: TwitterAuthToken? = null
+
+    override fun currentSession(): Observable<TwitterSession> {
+        val session = sessionManager.activeSession
+        return if (session == null) {
+            Observable.error(TwitterAuthException("no session connected"))
+        } else {
+            Observable.just(session)
+        }
+    }
+
     override fun handleOAuthResult(data: Intent): Observable<String> {
         return Observable.create<OAuthResponse> { emitter ->
             val params = UrlUtils.getQueryParams(data.data.query, false)
@@ -57,12 +73,6 @@ object TwitterAuthManager : AuthManager {
             .doOnNext { sessionManager.activeSession = it }
             .map { it.toString() }
     }
-
-    private val service by lazy {
-        OAuth1aService(TwitterCore.getInstance(), TwitterApi())
-    }
-
-    private val sessionManager by lazy { TwitterCore.getInstance().sessionManager }
 
 
     override fun oauthLogin(): Observable<String> {

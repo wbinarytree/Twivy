@@ -16,7 +16,7 @@ class FeedActivity : BaseUiActivity<Action, FeedUiModel, FeedTranslator>() {
     override fun render(ui: FeedUiModel) {
         when (ui) {
             is FeedUiModel.Loading          -> {
-//                refresh.isRefreshing = ui.isLoading
+                refresh.isRefreshing = ui.isLoading
             }
 
             is FeedUiModel.TweetResult      -> {
@@ -29,6 +29,7 @@ class FeedActivity : BaseUiActivity<Action, FeedUiModel, FeedTranslator>() {
     }
 
     private fun bindPagedTweets(tweets: PagedList<TweetDB>) {
+        refresh.isRefreshing = false
         val adapter = TweetPagingAdapter { tweet ->
             GlideApp.with(im_photo)
                 .load(tweet.user?.profileImageUrlHttps)
@@ -39,7 +40,6 @@ class FeedActivity : BaseUiActivity<Action, FeedUiModel, FeedTranslator>() {
         }
         adapter.submitList(tweets)
         rv_feeds.adapter = adapter
-
     }
 
     private fun bindTweets(tweets: List<TweetDB>) {
@@ -63,5 +63,8 @@ class FeedActivity : BaseUiActivity<Action, FeedUiModel, FeedTranslator>() {
         setContentView(R.layout.activity_feed)
         rv_feeds.layoutManager = LinearLayoutManager(this)
         Action.Init.send()
+        refresh.setOnRefreshListener {
+            Action.Refresh.send()
+        }
     }
 }

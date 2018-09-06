@@ -14,7 +14,8 @@ class FeedTranslator : BaseTranslator<Action, FeedUiModel>() {
 
     override fun Observable<Action>.reduce(): Observable<FeedUiModel> {
         return Observable.mergeArray(
-            ofType<Action.Init>().init()
+            ofType<Action.Init>().init(),
+            ofType<Action.Refresh>().refresh()
         )
     }
 
@@ -27,7 +28,16 @@ class FeedTranslator : BaseTranslator<Action, FeedUiModel>() {
             tweetRepo.getPagingList()
                 .map<FeedUiModel> { FeedUiModel.TweetPagedResult(it) }
                 .startWith(FeedUiModel.Loading(true))
-                .concatWith(Observable.just(FeedUiModel.Loading(false)))
+        }
+
+    }
+
+    private fun Observable<Action.Refresh>.refresh(): ObservableSource<FeedUiModel> {
+        return flatMap { _ ->
+            tweetRepo.getPagingList()
+                .map<FeedUiModel> { FeedUiModel.TweetPagedResult(it) }
+                .startWith(FeedUiModel.Loading(true))
+//                .concatWith(Observable.just(FeedUiModel.Loading(false)))
         }
 
     }

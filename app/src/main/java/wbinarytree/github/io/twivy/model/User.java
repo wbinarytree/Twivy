@@ -21,6 +21,7 @@ import android.arch.persistence.room.Ignore;
 
 import com.google.gson.annotations.SerializedName;
 import com.twitter.sdk.android.core.models.Identifiable;
+import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.UserEntities;
 
 import java.io.Serializable;

@@ -1,5 +1,6 @@
 package wbinarytree.github.io.twivy.repos.impl
 
+import android.arch.paging.DataSource
 import android.arch.paging.PagedList
 import android.arch.paging.RxPagedListBuilder
 import android.util.Log
@@ -14,11 +15,20 @@ import wbinarytree.github.io.twivy.model.toDb
 import wbinarytree.github.io.twivy.repos.TweetRepository
 import wbinarytree.github.io.twivy.repos.TweetRepository.Companion.DEFAULT_PAGING
 import wbinarytree.github.io.twivy.utils.toNonNullList
+import java.text.SimpleDateFormat
+import java.util.*
 
 object TweetRepositoryImpl : TweetRepository {
+    override fun refreshPage(): Observable<Boolean> {
+        return Observable.fromCallable {
+            database.tweetDao().deleteAll()
+            true
+        }
+    }
 
     private val database = TwivyDatabase.database
     private val disposables = CompositeDisposable()
+    private var factory: DataSource.Factory<Int, TweetDB>? = null
     override fun getPagingList(): Observable<PagedList<TweetDB>> {
         val callback = object : PagedList.BoundaryCallback<TweetDB>() {
             override fun onZeroItemsLoaded() {
@@ -33,15 +43,17 @@ object TweetRepositoryImpl : TweetRepository {
                 getNextPage(itemAtEnd)
             }
         }
+        val factory = database.tweetDao().getTweets()
+        this.factory = factory
         return RxPagedListBuilder<Int, TweetDB>(
-            database.tweetDao().getTweets(), DEFAULT_PAGING
+            factory, DEFAULT_PAGING
         )
             .setBoundaryCallback(callback)
+            .setFetchScheduler(Schedulers.io())
             .buildObservable()
             .doOnDispose {
                 disposables.clear()
             }
-            .subscribeOn(Schedulers.io())
     }
 
     private fun getInitTweets() {
@@ -100,5 +112,7 @@ object TweetRepositoryImpl : TweetRepository {
             .doOnNext { database.tweetDao().insert(*it.toTypedArray()) }
             .subscribeOn(Schedulers.io())
     }
+
+    val DATE_TIME_RFC822 = SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH)
 
 }

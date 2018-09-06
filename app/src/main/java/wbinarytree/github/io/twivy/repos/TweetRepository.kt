@@ -14,4 +14,6 @@ interface TweetRepository {
     fun getNextPage(id: Long, count: Int = DEFAULT_PAGING): Observable<List<TweetDB>>
 
     fun getPagingList(): Observable<PagedList<TweetDB>>
+
+    fun refreshPage(): Observable<Boolean>
 }

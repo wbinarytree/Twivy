@@ -7,9 +7,9 @@ The architecture is inspired by Jake Wharton's talk at Devoxx 2017 [The State of
 
 here is a simple version of how the architecture looks like:
 
-![](../img/redux-arch.jpeg)
+![](./img/redux-arch.jpeg)
 
 # Screenshots
 
-![](../img/twivy_2.jpeg)
-![](../img/twivy_1.jpeg)
+![](./img/twivy_2.jpeg)
+![](./img/twivy_1.jpeg)

@@ -26,8 +26,6 @@ class TweetPagingAdapter(
         }
     }
 
-//    on
-
     companion object {
         private val DIFF_CALLBACK = object :
             DiffUtil.ItemCallback<TweetDB>() {

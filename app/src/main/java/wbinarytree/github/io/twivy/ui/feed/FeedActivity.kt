@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import com.wbinarytree.github.kotlinutilsrecyclerview.GenericAdapter
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.item_tweet.*
+import kotlinx.android.synthetic.main.item_tweet.view.*
 import wbinarytree.github.io.twivy.R
 import wbinarytree.github.io.twivy.glide.GlideApp
 import wbinarytree.github.io.twivy.model.TweetDB
@@ -31,12 +32,12 @@ class FeedActivity : BaseUiActivity<Action, FeedUiModel, FeedTranslator>() {
     private fun bindPagedTweets(tweets: PagedList<TweetDB>) {
         refresh.isRefreshing = false
         val adapter = TweetPagingAdapter { tweet ->
-            GlideApp.with(im_photo)
+            GlideApp.with(itemView.im_photo)
                 .load(tweet.user?.profileImageUrlHttps)
                 .centerCrop()
-                .into(im_photo)
-            tv_screen_name.text = tweet.user?.screenName
-            tv_tweet_text.text = tweet.text
+                .into(itemView.im_photo)
+            itemView.tv_screen_name.text = tweet.user?.screenName
+            itemView.tv_tweet_text.text = tweet.text
         }
         adapter.submitList(tweets)
         rv_feeds.adapter = adapter

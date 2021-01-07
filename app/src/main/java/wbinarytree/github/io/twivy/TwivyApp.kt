@@ -47,7 +47,7 @@ class TwivyApp : Application() {
         @JvmStatic
         lateinit var repoComponent:RepositoryComponent
 
-        private const val CONSUMER_KEY = "OVMO3j2FqEHcJ5oue83KyWPIb"
-        private const val CONSUMER_SECRET = "DBBO4wlbOJ4hNVR4XBOmaxZSET0Ez0zg6mD6DrzpBfNhzKLGdD"
+        private const val CONSUMER_KEY = "ogc6F1YRRpBslfZRodww09gUM"
+        private const val CONSUMER_SECRET = "OMrZUarL4fLGVYlQObyH3F0raQ7SGGzM9OyMrej0zV42Yn6z6k"
     }
 }
